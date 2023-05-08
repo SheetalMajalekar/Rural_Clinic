@@ -1,122 +1,47 @@
-<div class="container" [ngClass]="{ 'sign-up-mode': isSignUpMode }">
-  <div class="forms-container">
+<section class="container">
+  <main #mainSection>
+    <section class="form-block" id="signUpForm">
+      <h2>Create Account</h2>
+      <form [formGroup]="loginForm">
+        <label for="user_name">Name</label>
+        <input type="text" formControlName="userName" id="user_name" />
+        <div class="text-danger" *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">User name is required.</div>
 
-    <div class="signin-signup">
-      <form [formGroup]="signinForm" (ngSubmit)="inSubmit()" class="sign-in-form">
-        <h2 class="title">Sign in</h2>
+        <label for="user_email_signup">Email</label>
+        <input type="email" formControlName="email" id="user_email_signup" />
+        <div class="text-danger" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">Email is required.</div>
 
-        <div class="form-group">
-          <i class="fas fa-user"></i>
-          <input type="text" formControlName="email" placeholder="Email" />
-          <div class="text-danger" *ngIf="signinForm.get('email')?.hasError('required') && signinForm.get('email')?.touched">Email is required.</div>
-        </div>
+        <label for="user_password_signup">Password</label>
+        <input type="password" formControlName="password" id="user_password_signup" />
+        <div class="text-danger" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">Password is required.</div>
 
-        <div class="form-group">
-          <i class="fas fa-lock"></i>
-          <input type="password" formControlName="password" placeholder="Password" />
-          <div class="text-danger" *ngIf="signinForm.get('password')?.hasError('required') && signinForm.get('password')?.touched">Password is required.</div>
-        </div>
-
-        <input type="submit" value="Login" class="btn solid" />
-
-        <p class="social-text">Or Sign in with social platforms</p>
-
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-
-        </div>
+        <button type="submit" class="btn">Sign Up</button>
       </form>
+    </section>
 
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="sign-up-form">
-        <h2 class="title">Sign up</h2>
+    <section class="form-block" id="signInForm">
+      <h2>Login</h2>
+      <form>
+        <label for="user_email_signin">Email</label>
+        <input type="email" id="user_email_signin" />
 
-        <div class="form-group ">
-          <i class="fas fa-user"></i>
-          <input type="text" formControlName="username" placeholder="Username" />
-        </div>
+        <label for="user_password_signin">Password</label>
+        <input type="password" id="user_password_signin" />
 
-        <div class="form-group ">
-          <i class="fas fa-envelope"></i>
-          <input type="email" formControlName="email" placeholder="Email" />
-        </div>
-        
-        <div class="form-group">
-          <i class="fas fa-lock"></i>
-          <input type="password" formControlName="password" placeholder="Password" />
-        </div>
-
-        <input type="submit" class="btn" value="Sign up" />
-
-        <p class="social-text">Or Sign up with social platforms</p>
-
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-twitter"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-
-          <a href="#" class="social-icon">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-
+        <button type="submit" class="btn">Sign In</button>
       </form>
+    </section>
+  </main>
+  <aside #asideSection>
+    <section class="login-block">
+      <h2>Already a User?</h2>
 
-    </div>
-  </div>
+      <button type="submit" id="login-btn" (click)="onSignInClick()" class="btn">Sign In</button>
+    </section>
+    <section class="register-block">
+      <h2>New User?</h2>
 
-
-  <div class="panels-container">
-
-    <div class="panel left-panel">
-      <div class="content">
-        <h3>New here ?</h3>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-          ex ratione. Aliquid!
-        </p>
-        <button class="btn transparent" (click)="switchToSignUp()" id="sign-up-btn">
-          Sign up
-        </button>
-      </div>
-      <img src="assets/log.svg" class="image" alt="" />
-    </div>
-
-    <div class="panel right-panel">
-      <div class="content">
-        <h3>One of us ?</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-          laboriosam ad deleniti.
-        </p>
-        <button class="btn transparent" (click)="switchToSignIn()" id="sign-in-btn">
-          Sign in
-        </button>
-      </div>
-      <img src="assets/register.svg" class="image" alt="" />
-    </div>
-    
-  </div>
-
-</div>
+      <button type="submit" id="register-btn" (click)="onSignUpClick()" class="btn">Sign Up</button>
+    </section>
+  </aside>
+</section>

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   isSignUpMode = false;
+  signupForm!: FormGroup;
+  signinForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
 
   @ViewChild('signInBtn')
   signInBtn!: ElementRef<HTMLButtonElement>;
@@ -25,24 +30,26 @@ export class LoginComponent implements OnInit {
     this.isSignUpMode = false;
     this.container.nativeElement.classList.remove('sign-up-mode');
   }
-  
-  constructor() {
+
+  ngOnInit(): void {
+    this.signupForm = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
+
+    this.signinForm = this.fb.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+
+    })
+  }
+
+  onSubmit() {
 
   }
 
-  ngOnInit(): void{
-
-    // this.signUpButton = document.getElementById('sign-up-btn') as HTMLButtonElement;
-    // this.signInButton = document.getElementById('sign-in-btn') as HTMLButtonElement;
-    // this.container = document.querySelector('.container') as HTMLElement;
-
-    // this.signUpButton.addEventListener('click', () => {
-      // this.container.classList.add('sign-up-mode');
-    // });
-
-    // this.signInButton.addEventListener('click', () => {
-      // this.container.classList.remove('sign-up-mode');
-    // });
+  inSubmit() {
 
   }
 }
